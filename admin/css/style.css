@@ -1,0 +1,53 @@
+.nav-pills li a:hover{
+	background-color: forestgreen;
+}
+
+.sideBarItems{
+	position: sticky;
+	top: 40px;
+	/*bottom: 0;*/
+}
+
+@media (min-width: 992px) {
+  .col-lg-2-5 {
+    flex-basis: 20%;
+    max-width: 20%;
+  }
+}
+.downBtnDiv{
+	bottom: 0;
+	position: sticky;
+	height: 40px;
+}
+.sidebarMain{
+	/*display: ;*/
+}
+
+.cardBody{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	text-align: center;
+}
+
+.cards{
+	display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 10px; /* Adjust the gap between the inner divs as needed */
+}
+
+.forestgreen{
+	background-color: forestgreen;
+	color: #fff;
+}
+
+.forestgreen:hover{
+	
+}
+.active{
+	background-color: #196719 !important;
+}
+
+td{
+	vertical-align: middle;
+}

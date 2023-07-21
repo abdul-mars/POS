@@ -1,0 +1,97 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f1eeeed0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.loginDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* border: 1px solid black; */
+}
+
+h3{
+    text-align: center;
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+.signinForm{
+    padding: 20px;
+    margin-top: -25px;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 10px;
+    background-color: #fff;
+    width: 300px;
+    /*height: 230px;*/
+}
+
+.inputDiv{
+    padding-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    /* margin: 10px; */
+    flex-direction: column;
+    
+}
+
+.inputDiv label{
+    font-size: 20px;
+    /* float: left; */
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+.inputDiv .input{
+    font-size: 20px;
+    border: 1px solid rgb(160, 157, 157);
+    border-radius: 5px;
+    /* margin-left: 20px; */
+    height: 30px;
+}
+
+.input:focus {
+    /* border-color: red; */
+    border: 2px solid red;
+    outline: none;
+}
+.signinBtn{
+    font-size: 20px;
+    color: #fff;
+    border-radius: 7px;
+    background-color: rgb(14, 14, 202);
+    padding: 10px;
+    border: none;
+    float: right;
+    cursor: pointer;
+}
+.signinBtn:hover{
+    background-color: rgb(7, 7, 173);
+}
+.err{
+    color: red;
+}
+
+.passwordSpan{
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.loader{
+    background-color: rgba(185, 169, 169, 0.212);
+    height: 100vh;
+    width: 100vw;
+    z-index: 1;
+    position: fixed;
+    text-align: center;
+    display: none;
+}
