@@ -1,4 +1,4 @@
-<?php require_once '../inc/dbConnect.php';
+<?php require_once '../checkSession.php';
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		if (isset($_POST['updatePriceBtn'])) {
 			$productId = mysqli_real_escape_string($con, $_POST['productId']);

@@ -6,7 +6,7 @@
 			} else {
 				$username = mysqli_real_escape_string($con, $_POST['username']);
 				$password = mysqli_real_escape_string($con, $_POST['password']);
-				$sql = "SELECT user_surname, user_forenames, username, user_password, user_role FROM users WHERE username = '$username'";
+				$sql = "SELECT user_id, user_surname, user_forenames, username, user_password, user_role FROM users WHERE username = '$username'";
 				$runSql = $con->query($sql);
 
 				if ($runSql->num_rows < 1) {
@@ -16,18 +16,21 @@
 					if (password_verify($password, $data['user_password'])) {
 						// echo "login success";
 						session_start();
-						$_SESSION['role'] = $data['user_role'];
 						if ($data['user_role'] === 'admin') {
 							// echo "admin login";
+							$_SESSION['adminUserId'] = $data['user_id'];
 							$_SESSION['adminUsername'] = $data['username'];
 							$_SESSION['adminSurname'] = $data['user_surname'];
 							$_SESSION['adminForenames'] = $data['user_forenames'];
+							$_SESSION['role'] = $data['user_role'];
 							echo 1;
 						} else {
 							// echo "user login";
+							$_SESSION['userId'] = $data['user_id'];
 							$_SESSION['username'] = $data['username'];
 							$_SESSION['surname'] = $data['user_surname'];
 							$_SESSION['forenames'] = $data['user_forenames'];
+							$_SESSION['role'] = $data['user_role'];
 							echo 0;
 						}
 					} else {

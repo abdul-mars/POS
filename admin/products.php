@@ -169,3 +169,5 @@
 		</div>
 	</div>
 </div>
+<!-- products js -->
+<script src="js/products.js?s=<?= time(); ?>"></script>

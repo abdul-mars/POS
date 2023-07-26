@@ -1,18 +1,4 @@
-<?php session_start();
-	if ((!isset($_SESSION['adminUsername'])) || (!isset($_SESSION['adminSurname'])) || (!isset($_SESSION['adminForenames'])) || (!isset($_SESSION['role']))) {
-		header("location: ../index.php");
-		// exit();
-	} else {
-		if ($_SESSION['role'] !== 'admin') {
-			header("location: ../index.php");
-			// exit();
-		} else {
-			$adminUsername = $_SESSION['adminUsername'];
-			$adminSurname = $_SESSION['adminSurname'];
-			$adminForenames = $_SESSION['adminForenames'];
-		}
-	}
-	require_once 'inc/dbConnect.php';
+<?php require_once 'checkSession.php';
 	
 ?>
 <!DOCTYPE html>
@@ -28,6 +14,8 @@
 	<link rel="stylesheet" href="../css/style.css?s=<?= time(); ?>">
 	<!-- custom admin css -->
 	<link rel="stylesheet" href="css/style.css?s=<?= time(); ?>">
+	<!-- jQuery -->
+	<script src="../js/jquery-3.7.js?s=<?= time(); ?>"></script>
 	<title>Admin Dashboard</title>
 </head>
 <body>
@@ -52,17 +40,12 @@
 		</div>
 	</div>
 
-
 	<!-- bootstrap js -->
 	<script src="../js/bootstrap.bundle.min.js?s=<?= time(); ?>"></script>
-	<!-- jQuery -->
-	<script src="../js/jquery-3.7.js?s=<?= time(); ?>"></script>
 	<!-- custom js main -->
 	<script src="../js/script.js?s=<?= time(); ?>"></script>
 	<script src="js/script.js?s=<?= time(); ?>"></script>
-	<!-- inventory js -->
-	<script src="js/inventory.js?s=<?= time(); ?>"></script>
-	<!-- products js -->
-	<script src="js/products.js?s=<?= time(); ?>"></script>
+	
+	
 </body>
 </html>

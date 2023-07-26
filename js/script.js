@@ -49,4 +49,14 @@ $(document).ready(function() {
 			}
 		}
 	});
+
+	$('#showHidePass').click(function() { //show / hide password
+		if ($('#password').attr('type') == 'password') {
+			$('#password').attr('type', 'text');
+			$(this).html('<i class="far fa-eye-slash"></i>');
+		} else {
+			$('#password').attr('type', 'password');
+			$(this).html('<i class="far fa-eye"></i>');
+		}
+	});
 });

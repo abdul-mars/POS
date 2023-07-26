@@ -1,8 +1,9 @@
 <?php session_start();
-	if (!isset($_SESSION['username']) || !isset($_SESSION['surname']) || !isset($_SESSION['forenames'])) {
-		header("location: ../../index.php");
-		exit();
+	if ((!isset($_SESSION['username'])) || (!isset($_SESSION['surname'])) || (!isset($_SESSION['forenames'])) || (!isset($_SESSION['userId']))) {
+		header("location: ../index.php");
+		// exit();
 	} else {
+		$userId = $_SESSION['userId'];
 		$username = $_SESSION['username'];
 		$surname = $_SESSION['surname'];
 		$forenames = $_SESSION['forenames'];
@@ -18,7 +19,7 @@
 	    echo "No product";
 	  } else {
 	    while ($data = $result->fetch_assoc()) { ?>
-	      <div class="card <?php echo ($data['stock'] > 0) ? "proCard" : "outOfStock"; ?>" product-name="<?= $data['product_name']; ?>" product-price="<?= $data['product_price']; ?>" product-id="<?= $data['product_id']; ?>" product-img="<?= $data['product_img']; ?>">
+	      <div class="card <?php echo ($data['stock'] > 0) ? "proCard" : "outOfStock"; ?>" product-name="<?= $data['product_name']; ?>" product-price="<?= $data['product_price']; ?>" product-id="<?= $data['product_id']; ?>" product-img="<?= $data['product_img']; ?>" product-stock="<?= $data['stock']; ?>">
 	        <div class="proCardInner">
 	          <div class="proName">
 	            <h5><?= $data['product_name']; ?></h5>
@@ -74,7 +75,7 @@
 			  			'$productPrice',
 			  			'$invoiceNo',
 			  			'$quantity',
-			  			'1'
+			  			'$userId'
 			  		);";
 
 			  		// check if inserted to sales tb

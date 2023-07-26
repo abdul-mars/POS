@@ -32,7 +32,7 @@
 
 .cards{
 	display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 10px; /* Adjust the gap between the inner divs as needed */
 }
 
@@ -50,4 +50,19 @@
 
 td{
 	vertical-align: middle;
+}
+
+a{
+	text-decoration: none;
+}
+a > .card{
+	display: flex !important;
+	flex-direction: column !important;
+	justify-content: space-between !important;
+}
+a > .card > .card-body{
+	flex-grow: 1;
+}
+a > .card:hover{
+	transform: scale(1.05);
 }

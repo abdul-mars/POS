@@ -1,8 +1,9 @@
 <?php session_start();
-	if ((!isset($_SESSION['username'])) || (!isset($_SESSION['surname'])) || (!isset($_SESSION['forenames']))) {
+	if ((!isset($_SESSION['username'])) || (!isset($_SESSION['surname'])) || (!isset($_SESSION['forenames'])) || (!isset($_SESSION['userId']))) {
 		header("location: ../index.php");
 		// exit();
 	} else {
+		$userId = $_SESSION['userId'];
 		$username = $_SESSION['username'];
 		$surname = $_SESSION['surname'];
 		$forenames = $_SESSION['forenames'];

@@ -1,11 +1,12 @@
 $(document).ready(function() {
   $('#productForm').submit(function(e) {
-    // $('#addInventoryBtn').click(function (e) {    
+  // $('#addInventoryBtn').click(function (e) { 
     e.preventDefault(); // Prevent form submission
 
     // Get form field values
     var productName = $('#productName').val();
     var productPrice = $('#productPrice').val();
+    var costPrice = $('#costPrice').val();
     var productImg = $('#productImg').prop('files')[0];
     var productStock = $('#productStock').val();
     var productDesc = $('#productDesc').val();
@@ -16,69 +17,68 @@ $(document).ready(function() {
       alert('Please enter a product name.');
       return;
     } else {
-      if (productPrice.trim() === '' || parseFloat(productPrice) === 0) {
-        alert('Please enter a valid product price.');
-        return;
+      if (costPrice.trim() === '' || parseFloat(costPrice) === 0) {
+        alert('Please enter a valid cost price.');
       } else {
-        if (!productImg) {
-          alert('Please select a product image.');
+        if (productPrice.trim() === '' || parseFloat(productPrice) === 0) {
+          alert('Please enter a valid product price.');
           return;
         } else {
-          // File type validation
-          var allowedExtensions = /(\.png|\.jpeg|\.jpg)$/i;
-          if (!allowedExtensions.exec(productImg.name)) {
-            alert('Invalid file type. Please select a PNG, JPG, or JPEG image.');
+          if (!productImg) {
+            alert('Please select a product image.');
             return;
           } else {
-            // File size validation
-            var maxSize = 3 * 1024 * 1024; // 3MB
-            if (productImg.size > maxSize) {
-              alert('File size exceeds the limit. Please select a file up to 3MB.');
+            // File type validation
+            var allowedExtensions = /(\.png|\.jpeg|\.jpg)$/i;
+            if (!allowedExtensions.exec(productImg.name)) {
+              alert('Invalid file type. Please select a PNG, JPG, or JPEG image.');
               return;
             } else {
-              if (productStock.trim() === '') {
-                alert('Please enter the product stock.');
+              // File size validation
+              var maxSize = 3 * 1024 * 1024; // 3MB
+              if (productImg.size > maxSize) {
+                alert('File size exceeds the limit. Please select a file up to 3MB.');
                 return;
               } else {
-                // All form fields are valid, proceed with Ajax submission
-                var formData = new FormData($(this)[0]);
-                var data = {
-                  'productName': productName,
-                  'productPrice': productPrice,
-                  'productImg': productImg,
-                  'productStock': productStock,
-                  'productDesc': productDesc,
-                  'addInventoryBtn': true,
-                }
-                // console.log(data);
-                $.ajax({
-                  url: 'process/inventory.pro.php', // Replace with your backend URL
-                  type: 'POST',
-                  data: formData,
-                  dataType: 'json',
-                  contentType: false,
-                  processData: false,
-                  // success: function(response) {
-                  //   // Handle success response
-                  //   console.log(response);
-
-                  // },
-                  success: function(response) {
-                    showToast(response.message);
-                    $('#productForm')[0].reset();
-                    $('#addInventMdl').modal('hide');
-                  },
-                  error: function(xhr, status, error) {
-                    // Handle error response
-                    console.log(xhr.responseText);
-                    // Display an error message or take appropriate action
+                if (productStock.trim() === '') {
+                  alert('Please enter the product stock.');
+                  return;
+                } else {
+                  // All form fields are valid, proceed with Ajax submission
+                  var formData = new FormData($(this)[0]);
+                  var data = {
+                    'productName': productName,
+                    'productPrice': productPrice,
+                    'productImg': productImg,
+                    'productStock': productStock,
+                    'productDesc': productDesc,
+                    'addInventoryBtn': true,
                   }
-                });
+                  // console.log(data);
+                  $.ajax({
+                    url: 'process/inventory.pro.php', // Replace with your backend URL
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                      showToast(response.message);
+                      $('#productForm')[0].reset();
+                      $('#addInventMdl').modal('hide');
+                    },
+                    error: function(xhr, status, error) {
+                      // Handle error response
+                      console.log(xhr.responseText);
+                      // Display an error message or take appropriate action
+                    }
+                  });
+                }
               }
             }
           }
         }
-      }
+      } 
     }
   });
 
@@ -97,5 +97,53 @@ $(document).ready(function() {
     // $('.modal-body').text(productId);
     modalTitle.text('Update stock for ' + productName);
     $('#productId').val(productId);
+  });
+
+  $('#updatePriceCheck').change(function () {
+    // if ($(this).is(':checked')) {
+    if($(this).prop('checked')){
+      var newPriceInput = ('<label for="newPrice" class="form-label">New Price</label>\
+        <input type="number" name="newPrice" id="newPrice" class="form-control" placeholder="Enter the cost price">');
+      
+      $('.newPriceDiv').append(newPriceInput);
+    } else {
+      $('.newPriceDiv').empty();
+    }
+  });
+
+  $('.updateStockBtn').click(function (e) {
+    e.preventDefault();
+    var productId = $('#productId').val();
+    var stock = $('#stock').val();
+    var costPrice = $('#costPrice').val();
+    var updatePriceCheck = $('#updatePriceCheck').prop('checked');
+    var newPrice = '';
+    if ($('#newPrice').length) {
+      var newPrice = $('#newPrice').val();
+    }
+
+    var data = {
+      'productId': productId,
+      'newStock': stock,
+      'newCostPrice': costPrice,
+      'updatePriceCheck': updatePriceCheck,
+      'newPrice': newPrice,
+      'updatePriceBtn': true,
+    }
+
+    $.ajax({
+      url: 'process/inventory_update.php',
+      type: 'post',
+      data: data,
+      beforeSend: function() {},
+      success: function (response) {
+        alert(response);
+      },
+      error: function(xhr, status, error) {
+        console.log(error);
+      }
+    });
+    
+    
   });
 });

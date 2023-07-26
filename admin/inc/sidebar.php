@@ -11,22 +11,22 @@
 			</li>
 			<li class="nav-item py-2 py-sm-0">
 				<a href="?page=inventory" class="nav-link text-white <?php echo (isset($_GET['page']) && $_GET['page'] === 'inventory') ? 'active' : ''; ?>">
-					<i class="fs-5 fa fa-clipboard"></i><span class="fs-4 ms-3 d-none d-sm-inline">Inventory</span>
+					<i class="fs-5 fas fa-clipboard-list"></i><span class="fs-4 ms-3 d-none d-sm-inline">Inventory</span>
 				</a>
 			</li>
 			<li class="nav-item py-2 py-sm-0">
 				<a href="?page=products" class="nav-link text-white <?php echo (isset($_GET['page']) && $_GET['page'] === 'products') ? 'active' : ''; ?>">
-					<i class="fs-5 fas fa-table"></i><span class="fs-4 ms-3 d-none d-sm-inline">Products</span>
+					<i class="fs-5 fas fa-box-open"></i><span class="fs-4 ms-3 d-none d-sm-inline">Products</span>
 				</a>
 			</li>
 			<li class="nav-item py-2 py-sm-0">
-				<a href="#" class="nav-link text-white">
+				<a href="?page=reports" class="nav-link text-white <?= (isset($_GET['page']) && $_GET['page'] === 'reports') ? 'active' : ''; ?>">
 					<i class="fs-5 fas fa-book"></i><span class="fs-4 ms-3 d-none d-sm-inline">Reports</span>
 				</a>
 			</li>
 			<li class="nav-item py-2 py-sm-0">
-				<a href="#" class="nav-link text-white">
-					<i class="fs-5 far fa-user"></i><span class="fs-4 ms-3 d-none d-sm-inline">Users</span>
+				<a href="?page=users" class="nav-link text-white <?= (isset($_GET['page']) && $_GET['page'] === 'users') ? 'active' : ''; ?>">
+					<i class="fs-5 fas fa-user"></i><span class="fs-4 ms-3 d-none d-sm-inline">Users</span>
 				</a>
 			</li>
 			<li class="nav-item py-2 py-sm-0">
@@ -35,19 +35,22 @@
 				</a>
 			</li>
 			<li class="nav-item py-2 py-sm-0">
-				<a href="#" class="nav-link text-white">
-					<i class="fs-5 far fa-bell"></i><span class="fs-4 ms-3 d-none d-sm-inline">Notifications</span>
+				<a href="?page=notifications" class="nav-link text-white <?= (isset($_GET['page']) && $_GET['page'] === 'notifications') ? 'active' : ''; ?>">
+					<i class="fs-5 fas fa-bell"></i>
+					<span class="fs-4 ms-3 d-none d-sm-inline">Notifications
+						<sup><span class="bade rounded-pil bg-succes notificationCount" id="notificationCount"></span></sup>
+					</span>
 				</a>
 			</li>
 		</ul>
 	</div>
 	<div class="dropdown open bg-dark downBtnDiv">
 		<button class="btn border-none text-white dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" data-aria-expanded="false">
-		<i class="fa fa-user"></i> <span class="ms-2 d-none d-sm-inline"><?= ucwords($adminSurname.' '.$adminForenames); ?></span>
+		<i class="fas fa-user-circle"></i> <span class="ms-2 d-none d-sm-inline"><?= ucwords($adminSurname.' '.$adminForenames); ?></span>
 		</button>
 		<div class="dropdown-menu" aria-labbeledby="triggerId">
 			<button class="dropdown-item"><i class="fas fa-cog"></i> Settings</button>
-			<button class="dropdown-item"><i class="far fa-user-circle"></i> Profile</button>
+			<button class="dropdown-item"><i class="far fa-user"></i> Profile</button>
 			<!-- <button class="dropdown-item"><i class="far fa-user-circle"></i> Notification</button> -->
 			<div class="dropdown-divider"></div>
 			<a href="../signout.php" class="dropdown-item"><i class="fas fa-power-off"></i> Sign Out</a>

@@ -37,7 +37,7 @@ $(document).ready(function(){
 				'toDate': $('#toDate').val(),
 				'viewSalesBtn': true,
 			}
-			console.log(data);
+			//console.log(data);
 			// $.ajax({
 			// 	url: 'process/getReports.php',
 			// 	type: 'post',

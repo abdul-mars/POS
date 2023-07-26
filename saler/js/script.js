@@ -32,72 +32,151 @@ $(document).ready(function(){
 	  }
 	});
 
+	function productClicked() {
+	  var productName = $(this).attr('product-name');
+	  var productId = $(this).attr('product-id');
+	  var productPrice = parseFloat($(this).attr('product-price'));
+	  var productImg = $(this).attr('product-img');
+	  var productStock = parseInt($(this).attr('product-stock')); // Convert stock to integer
+
+	  // Check if the product quantity is equal to the stock
+	  var existingProduct = $('.productItems').find('.product-item[data-product-id="' + productId + '"]');
+	  if (existingProduct.length > 0) {
+	    var quantity = parseInt(existingProduct.find('.quantity').text());
+	    if (quantity >= productStock) {
+	      // Quantity is equal to or greater than stock, show an alert message or disable click event
+	      alert("Product quantity cannot exceed available stock!");
+	      return;
+	    }
+	    var newQuantity = quantity + 1;
+	    existingProduct.find('.quantity').text(newQuantity);
+
+	    var totalPrice = parseFloat(existingProduct.find('.product-price').data('price')) * newQuantity;
+	    existingProduct.find('.product-price').html('¢ ' + totalPrice.toFixed(2));
+	  } else {
+	    var product = '\
+	      <div class="product-item" data-product-id="' + productId + '">\
+	        <figure class="product-image">\
+	          <img src="../assets/products/' + productImg + '" alt="product image">\
+	        </figure>\
+	        <div class="product-details">\
+	          <div class="product-name-quantity">\
+	            <h5>' + productName + '</h5>\
+	            <div class="quantity-controls">\
+	              <span class="minus"><i class="fas fa-minus"></i></span>\
+	              <span class="quantity">1</span>\
+	              <span class="plus"><i class="fas fa-plus"></i></span>\
+	            </div>\
+	          </div>\
+	          <div class="product-price" data-price="' + productPrice + '">\
+	            <h4>¢ ' + productPrice.toFixed(2) + '</h4>\
+	          </div>\
+	        </div>\
+	      </div>';
+
+	    $('.productItems').append(product);
+	  }
+
+  updateTotalPrice();
+  updateItemsInCart();
+}
+
+$('.cards').on('click', '.proCard', productClicked);
+$('.searchResults').on('click', '.proCard', productClicked);
+
+
+
 
 	// function to handle product click
-	function productClicked(){
-		var productName = $(this).attr('product-name');
-	  	var productId = $(this).attr('product-id');
-	  	var productPrice = parseFloat($(this).attr('product-price'));
-	  	var productImg = $(this).attr('product-img');
+	// function productClicked(){
+	// 	var productName = $(this).attr('product-name');
+	//   	var productId = $(this).attr('product-id');
+	//   	var productPrice = parseFloat($(this).attr('product-price'));
+	//   	var productImg = $(this).attr('product-img');
+	//   	// var productStock = $(this).attr('product-stock');
 	  
-	  	var existingProduct = $('.productItems').find('.product-item[data-product-id="' + productId + '"]');
+	//   	var existingProduct = $('.productItems').find('.product-item[data-product-id="' + productId + '"]');
 	  
-	  	if (existingProduct.length > 0) {
-		    var quantity = parseInt(existingProduct.find('.quantity').text());
-		    var newQuantity = quantity + 1;
-		    existingProduct.find('.quantity').text(newQuantity);
+	//   	if (existingProduct.length > 0) {
+	// 	    var quantity = parseInt(existingProduct.find('.quantity').text());
+	// 	    var newQuantity = quantity + 1;
+	// 	    existingProduct.find('.quantity').text(newQuantity);
 	    
-		    var totalPrice = parseFloat(existingProduct.find('.product-price').data('price')) * newQuantity;
-		    existingProduct.find('.product-price').html('¢ ' + totalPrice.toFixed(2));
-	  	} else {
-		    var product = '\
-		    <div class="product-item" data-product-id="' + productId + '">\
-		        <figure class="product-image">\
-		          <img src="../assets/products/' + productImg + '" alt="product image">\
-		        </figure>\
-		        <div class="product-details">\
-		          <div class="product-name-quantity">\
-		            <h5>' + productName + '</h5>\
-		            <div class="quantity-controls">\
-		              <span class="minus"><i class="fas fa-minus"></i></span>\
-		              <span class="quantity">1</span>\
-		              <span class="plus"><i class="fas fa-plus"></i></span>\
-		            </div>\
-		          </div>\
-		          <div class="product-price" data-price="' + productPrice + '">\
-		            <h4>¢ ' + productPrice.toFixed(2) + '</h4>\
-		          </div>\
-		        </div>\
-		    </div>';
+	// 	    var totalPrice = parseFloat(existingProduct.find('.product-price').data('price')) * newQuantity;
+	// 	    existingProduct.find('.product-price').html('¢ ' + totalPrice.toFixed(2));
+	// 	    // $(this).attr('product-stock').val()
+	//   	} else {
+	// 	    var product = '\
+	// 	    <div class="product-item" data-product-id="' + productId + '">\
+	// 	        <figure class="product-image">\
+	// 	          <img src="../assets/products/' + productImg + '" alt="product image">\
+	// 	        </figure>\
+	// 	        <div class="product-details">\
+	// 	          <div class="product-name-quantity">\
+	// 	            <h5>' + productName + '</h5>\
+	// 	            <div class="quantity-controls">\
+	// 	              <span class="minus"><i class="fas fa-minus"></i></span>\
+	// 	              <span class="quantity">1</span>\
+	// 	              <span class="plus"><i class="fas fa-plus"></i></span>\
+	// 	            </div>\
+	// 	          </div>\
+	// 	          <div class="product-price" data-price="' + productPrice + '">\
+	// 	            <h4>¢ ' + productPrice.toFixed(2) + '</h4>\
+	// 	          </div>\
+	// 	        </div>\
+	// 	    </div>';
 		    
-		    $('.productItems').append(product);
-	  	}
+	// 	    $('.productItems').append(product);
+	//   	}
 	  
-	  	updateTotalPrice();
-	 	updateItemsInCart();
-	}
+	//   	updateTotalPrice();
+	//  	updateItemsInCart();
+	// }
 
 	// $('.cards').on('click', '.proCard', function() {
 	//   	productClicked();
 	// });
-	$('.cards').on('click', '.proCard', productClicked);
-	$('.searchResults').on('click', '.proCard', productClicked);
+	// $('.cards').on('click', '.proCard', productClicked);
+	// $('.searchResults').on('click', '.proCard', productClicked);
 	$('.searchResults').on('click', '.outOfStock', function() {
 		alert('Product out of stock.');
 	});
+	// $('.productItems').on('click', '.plus', function() {
+	//   var productItem = $(this).closest('.product-item');
+	//   var quantity = parseInt(productItem.find('.quantity').text());
+	//   var newQuantity = quantity + 1;
+	//   productItem.find('.quantity').text(newQuantity);
+	  
+	//   var productPrice = parseFloat(productItem.find('.product-price').data('price'));
+	//   var totalPrice = productPrice * newQuantity;
+	//   productItem.find('.product-price').html('¢ ' + totalPrice.toFixed(2));
+	  
+	//   updateTotalPrice();
+	//   updateItemsInCart();
+	// });
+
 	$('.productItems').on('click', '.plus', function() {
 	  var productItem = $(this).closest('.product-item');
 	  var quantity = parseInt(productItem.find('.quantity').text());
+	  var productStock = parseInt(productItem.attr('product-stock'));
+
+	  if (quantity >= productStock) {
+	    // Quantity is equal to or greater than stock, show an alert message
+	    alert("Product quantity cannot exceed available stock!");
+	    return;
+	  }
+
 	  var newQuantity = quantity + 1;
 	  productItem.find('.quantity').text(newQuantity);
-	  
+
 	  var productPrice = parseFloat(productItem.find('.product-price').data('price'));
 	  var totalPrice = productPrice * newQuantity;
 	  productItem.find('.product-price').html('¢ ' + totalPrice.toFixed(2));
-	  
+
 	  updateTotalPrice();
 	  updateItemsInCart();
 	});
+
 
 	$('.productItems').on('click', '.minus', function() {
 	  var productItem = $(this).closest('.product-item');
@@ -204,5 +283,6 @@ $(document).ready(function(){
 		updateTotalPrice();
 		updateItemsInCart();
 	});
+
 
 })
