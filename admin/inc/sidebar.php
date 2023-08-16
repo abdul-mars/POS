@@ -20,18 +20,18 @@
 				</a>
 			</li>
 			<li class="nav-item py-2 py-sm-0">
+				<a href="?page=sales" class="nav-link text-white <?php echo (isset($_GET['page']) && $_GET['page'] === 'sales') ? 'active' : ''; ?>">
+					<i class="fs-5 fas fa-handshake"></i><span class="fs-4 ms-3 d-none d-sm-inline">Sales</span>
+				</a>
+			</li>
+			<li class="nav-item py-2 py-sm-0">
 				<a href="?page=reports" class="nav-link text-white <?= (isset($_GET['page']) && $_GET['page'] === 'reports') ? 'active' : ''; ?>">
-					<i class="fs-5 fas fa-book"></i><span class="fs-4 ms-3 d-none d-sm-inline">Reports</span>
+					<i class="fs-5 fas fa-chart-line"></i><span class="fs-4 ms-3 d-none d-sm-inline">Reports</span>
 				</a>
 			</li>
 			<li class="nav-item py-2 py-sm-0">
 				<a href="?page=users" class="nav-link text-white <?= (isset($_GET['page']) && $_GET['page'] === 'users') ? 'active' : ''; ?>">
 					<i class="fs-5 fas fa-user"></i><span class="fs-4 ms-3 d-none d-sm-inline">Users</span>
-				</a>
-			</li>
-			<li class="nav-item py-2 py-sm-0">
-				<a href="#" class="nav-link text-white">
-					<i class="fs-5 fa fa-users"></i><span class="fs-4 ms-3 d-none d-sm-inline">Customers</span>
 				</a>
 			</li>
 			<li class="nav-item py-2 py-sm-0">
@@ -46,14 +46,15 @@
 	</div>
 	<div class="dropdown open bg-dark downBtnDiv">
 		<button class="btn border-none text-white dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" data-aria-expanded="false">
-		<i class="fas fa-user-circle"></i> <span class="ms-2 d-none d-sm-inline"><?= ucwords($adminSurname.' '.$adminForenames); ?></span>
+		<i class="fas fa-user-circle"></i> <span class="ms-2 d-none d-sm-inline"><?= ucwords($name); ?></span>
 		</button>
 		<div class="dropdown-menu" aria-labbeledby="triggerId">
 			<button class="dropdown-item"><i class="fas fa-cog"></i> Settings</button>
-			<button class="dropdown-item"><i class="far fa-user"></i> Profile</button>
+			<a href="?page=profile" class="dropdown-item"><i class="far fa-user"></i> Profile</a>
+			<!-- <a href="../saler/profile.php" class="dropdown-item"><i class="far fa-user"></i> Profile</a> -->
 			<!-- <button class="dropdown-item"><i class="far fa-user-circle"></i> Notification</button> -->
 			<div class="dropdown-divider"></div>
-			<a href="../signout.php" class="dropdown-item"><i class="fas fa-power-off"></i> Sign Out</a>
+			<a href="signout.php" class="dropdown-item"><i class="fas fa-power-off"></i> Sign Out</a>
 		</div>
 	</div>
 </div>

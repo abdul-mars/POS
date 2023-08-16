@@ -50,16 +50,16 @@
 					</div>
 				</div>
 			</a>
-			<a href="?page=customers">
+			<a href="?page=sales">
 				<div class="card text-white" style="width: 250px; background-color: DarkOrange ; border-top: 4px solid darkblue;">
 					<div class="card-body cardBody p-4">
 						<div class="cardText">
 							<p style="margin-bottom: 6px; font-family: arial; white-space: nowrap;">40 Total</p>
-							<h4 style="letter-spacing: 3px;">Customers</h4>
+							<h4 style="letter-spacing: 3px;">Sales</h4>
 							<p style="margin-bottom: -6px; font-family: arial; white-space: nowrap;">Tap to view</p>
 						</div>
 						<div>
-							<i class="fas fa-users fa-4x text-mued" style="opacity: .7;"></i>
+							<i class="fas fa-handshake fa-4x text-mued" style="opacity: .7;"></i>
 						</div>
 					</div>
 				</div>
@@ -68,12 +68,12 @@
 				<div class="card text-white" style="width: 250px; background-color: darkblue ; border-top: 4px solid darkorange;">
 					<div class="card-body cardBody p-4">
 						<div class="cardText">
-							<!-- <p style="margin-bottom: 6px; font-family: arial; white-space: nowrap;">50 Total users</p> -->
+							<p style="margin-bottom: -3px; font-family: arial; white-space: nowrap;">Sales reports</p>
 							<h4 style="letter-spacing: 4px;">Reports</h4>
 							<p style="margin-bottom: -6px; font-family: arial; white-space: nowrap;">Tap to view</p>
 						</div>
 						<div>
-							<i class="fas fa-chart-bar fa-4x text-mued" style="opacity: .7;"></i>
+							<i class="fas fa-chart-line fa-4x text-mued" style="opacity: .7;"></i>
 						</div>
 					</div>
 				</div>

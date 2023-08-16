@@ -11,9 +11,9 @@
 	</div>
 	<div id="toastContainer" class="position-absolute top-0 end-0 p-3" style="z-index: 9999"></div>
 	<div class="card mt-3 bg-light">
-		<div class="card-body">
+		<div class="card-body ">
 			<div class="accordion accordion-flush row" id="notifAccord">
-				<div class="accordion-item col-6">
+				<!-- <div class="accordion-item col-6">
 					<h2 class="accordion-header">
 					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
 					Low Stock Alert!
@@ -46,7 +46,7 @@
 					<div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#notifAccord">
 						<div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

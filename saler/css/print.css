@@ -1,0 +1,32 @@
+@media print {
+  body *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: #fff; /* Set the background color for the print version */
+    visibility: hidden;
+  }
+  .chkoutMain * {
+    visibility: visible;
+    width: 100%;
+  }
+  .text-cente, .prtBtnDiv {
+    display: none; /* Hide unnecessary elements in the print version */
+  }
+  .chkoutItems {
+    width: 100%;
+  }
+  .prtBtnDiv {
+    display: none;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  table th, table td {
+    border: 1px solid #000; /* Add borders to table cells for better visibility */
+    padding: 5px;
+    text-align: left;
+  }
+  /* Add any additional styles for the print version as needed */
+}

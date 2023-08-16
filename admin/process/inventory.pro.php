@@ -1,5 +1,6 @@
 <?php require_once '../checkSession.php';
-
+	
+	$adminUserId = $_SESSION['userId'];
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		
 		$productName = ucwords($_POST["productName"]);

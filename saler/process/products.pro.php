@@ -7,6 +7,7 @@
 		$username = $_SESSION['username'];
 		$surname = $_SESSION['surname'];
 		$forenames = $_SESSION['forenames'];
+		$phone = $_SESSION['phone'];
 	}
 	require_once '../../inc/dbConnect.php';
 
@@ -22,14 +23,14 @@
 	      <div class="card <?php echo ($data['stock'] > 0) ? "proCard" : "outOfStock"; ?>" product-name="<?= $data['product_name']; ?>" product-price="<?= $data['product_price']; ?>" product-id="<?= $data['product_id']; ?>" product-img="<?= $data['product_img']; ?>" product-stock="<?= $data['stock']; ?>">
 	        <div class="proCardInner">
 	          <div class="proName">
-	            <h5><?= $data['product_name']; ?></h5>
-	          </div>
-	          <div class="proImg">
-	            <img src="../assets/products/<?= $data['product_img']; ?>" alt="product image" width="100">
-	          </div>
-	          <div class="proPrice">
-	            <h5>₵<?= $data['product_price']; ?></h5>
-	          </div>
+					<p class="fw-bold"><?= $data['product_name']; ?></p>
+				</div>
+				<div class="proImg">
+					<img src="../assets/products/<?= $data['product_img']; ?>" alt="product image" width="50" height="50">
+				</div>
+				<div class="proPrice" style="<!-- background-color: lavender; -->">
+					<p class="fw-bold">₵<?= $data['product_price']; ?></p>
+				</div>
 	        </div>
 	      </div>
 	    <?php }
@@ -86,7 +87,7 @@
 			  			$sqlUpdateStock = "UPDATE products SET stock = '$newStock' WHERE product_id = '$productIdFromDb'";
 			  			if ($con -> query($sqlUpdateStock) === TRUE) {
 			  				$subTotal = $quantity * $productPrice;
-			  				$chkoutItems .= '<tr>
+			  				$chkoutItems .= '<tr class="checkoutRow">
 									<td>'.$productNameFromDb.'</td>
 									<td>'.$quantity.'</td>
 									<td>'.$productPrice.'</td>
@@ -104,18 +105,18 @@
 			  // echo 'Product ID: ' . $productId . ', Quantity: ' . $quantity . '<br>';
 			}
 			// echo $chkoutItems;
-			echo '<div class="chkoutMain shadow-sm">
+			echo '<div class="chkoutMain bg-light pt-2 shadow-sm">
 				<div class="text-cente bg-light pt-2" style="width: 100%;">
 					<h4 class="text-center">MARs LIMITED</h4>
 					<p class="text-center">P.O.BOX 34, KANVILI - TAMALE <br>TEL: 0249393898 / 0507557540</p>
 					<small class="invTime">
-						<p>Inv No: '.$invoiceNo.'</p>
-						<p>'.date('d-M-Y H:i:s').'</p>
+						<p class="inv">Inv No: '.$invoiceNo.'</p>
+						<p class="date">'.date('d-M-Y H:i:s').'</p>
 					</small> <hr style="margin-top: -10px; margin-bottom: ;">
 					<div class="chkoutItems p-2" style="width: ;">
 						<table class="text-left" style="width: 100%;">
 							<thead>
-								<tr>
+								<tr style="">
 									<th>ItemName</th>
 									<th>Qty</th>
 									<th>Price</th>
@@ -124,12 +125,15 @@
 							</thead>
 							<tbody>
 								'.$chkoutItems.'
-								<tr class="" style="background: #eee;">
+								<tr class="totalRow" style="background: #eee;">
 									<th colspan="3">Total Amount:</th>
 									<th>Ghc '.$totalAmount.'</th>
 								</tr>
 							</tbody>
 						</table>
+						<hr>
+						<p class="text-center fw-bold" style="margin-top: -6px">**THANK YOU VISIT AGAIN**</p>
+						<p class="text-center fw-bold" style="margin-top: -15px; margin-bottom: -20px">Goods sold are not returnable</p>
 					</div>
 					<hr>
 					<div class="prtBtnDiv text-center " style="width: 100%; margin-bottom: 20px !important;">

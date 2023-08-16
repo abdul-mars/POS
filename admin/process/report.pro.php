@@ -17,18 +17,23 @@
 		          SUM(sales.product_price * quantity_sold) AS total_revenue
 		          FROM sales
 		          INNER JOIN products ON sales.product_id = products.product_id
-		          WHERE date_sold >= ? AND date_sold <= ?
+		          WHERE date_sold >= '$fromDate' AND date_sold <= '$toDate'
 		          GROUP BY product_id
 		          ORDER BY quantity_sold DESC
 		          LIMIT 5"; // Limit to top 5 selling products
-			$stmt = $con->prepare($query);
-			$stmt->bind_param("ss", $fromDate, $toDate);
-			$stmt->execute();
-			$result = $stmt->get_result();
-			$salesData = $result->fetch_all(MYSQLI_ASSOC);
+			// $stmt = $con->prepare($query);
+			// $stmt->bind_param("ss", $fromDate, $toDate);
+			// $stmt->execute();
+			// $result = $stmt->get_result();
+			// $salesData = $result->fetch_all(MYSQLI_ASSOC);
+		          $result = $con->query($query);
 			// Calculate total sales
 
 			$totalSales = 0;
+			if ($result->num_rows < 1) {
+				echo "No report from ". date('d-M-Y', strtotime($fromDate))." to ". date('d-M-Y', strtotime($toDate));
+			} else {
+				$salesData = $result->fetch_all(MYSQLI_ASSOC);
 			foreach ($salesData as $sale) {
 			    $totalSales += $sale['total_sales'];
 			}
@@ -53,7 +58,7 @@
 			$totalOrders = array_sum(array_column($salesData, 'total_orders'));
 
 			// Calculate average order value
-			$averageOrderValue = $totalSales / $totalOrders;
+			$averageOrderValue = $totalSales / $totalOrders; //}
  			?>
 
 			<div class="card-body">
@@ -65,7 +70,7 @@
 								<div class="card-body text-center">
 									<h5 class="card-title">Total Sales</h5>
 									<p class="card-text">Additional information about the period.</p>
-									<h3 class="card-text">₵<?= number_format($totalSales, 2); ?></h3>
+									<h3 class="card-text">Ghc <?= number_format($totalSales, 2); ?></h3>
 								</div>
 							</div>
 							
@@ -82,7 +87,7 @@
 								<div class="card-body text-center">
 									<h5 class="card-title">Average Order Value</h5>
 									<p class="card-text">Calculated based on total sales and total number of orders.</p>
-									<h3 class="card-text">$200</h3>
+									<h3 class="card-text">Ghc 200</h3>
 								</div>
 							</div>
 						</div>
@@ -109,7 +114,7 @@
 									            <tr>
 									                <td><?= $sale['product_name']; ?></td>
 									                <td><?= $sale['quantity_sold']; ?></td>
-									                <td>$<?= number_format($sale['total_revenue'], 2); ?></td>
+									                <td><?= number_format($sale['total_revenue'], 2); ?>₵</td>
 									            </tr>
 									        <?php endforeach; ?>
 											<!-- Add more rows for other products -->
@@ -118,21 +123,21 @@
 								</div>
 							</div>
 							<!-- Sales Trend -->
-							<div class="card mb-4">
+							<!-- <div class="card mb-4">
 								<div class="card-body">
 									<h5 class="card-title">Sales Trend</h5>
-									<!-- Add a line chart or area graph here using charting libraries like Chart.js or Highcharts -->
+									Add a line chart or area graph here using charting libraries like Chart.js or Highcharts
 									<div id="salesTrendChart"></div>
 								</div>
-							</div>
+							</div> -->
 							<!-- Sales by Category -->
-							<div class="card mb-4">
+							<!-- <div class="card mb-4">
 								<div class="card-body">
 									<h5 class="card-title">Sales by Category</h5>
-									<!-- Add a bar chart or pie chart here using charting libraries -->
+									Add a bar chart or pie chart here using charting libraries
 									<div id="salesByCategoryChart"></div>
 								</div>
-							</div>
+							</div> -->
 							<!-- Best Performing Salespersons -->
 							<!-- <div class="card mb-4">
 								<div class="card-body">
@@ -168,7 +173,7 @@
 							        <ul class="list-group">
 							            <?php foreach ($bestPerformingSalespersons as $salesperson): ?>
 							            <li class="list-group-item">
-							                <?= ucwords($salesperson['user_surname']. ' '. $salesperson['user_forenames']); ?>: $<?= $salesperson['total_sales']; ?>
+							                <?= ucwords($salesperson['user_surname']. ' '. $salesperson['user_forenames']); ?>: Ghc <?= $salesperson['total_sales']; ?>
 							            </li>
 							            <?php endforeach; ?>
 							        </ul>
@@ -188,7 +193,7 @@
 				        </div>
 				      	</div> -->
 
-				      <div class="col-md-6">
+				      <div class="col-md-12">
 				        <!-- <div class="card mb-4">
 				          <div class="card-body text-center">
 				            <h5 class="card-title">Refunds and Returns</h5>
@@ -210,5 +215,5 @@
 				    </div>
 				</div>
 			</div>
-		<?php }
+		<?php } }
 	}

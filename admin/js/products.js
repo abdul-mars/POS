@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	fetchTables('#productTable', 'process/ajax.tables.pro.php?action=product_table');
 	// var updatePriceMdl = $('#updatePriceMdl');
 	var updatePriceMdl = document.getElementById('updatePriceMdl');
 	updatePriceMdl.addEventListener('show.bs.modal', function (event) {
@@ -51,6 +52,7 @@ $(document).ready(function(){
 						showToast(response);
 	                    $('#updatePriceForm')[0].reset();
 	                    $('#updatePriceMdl').modal('hide');
+	                    fetchTables('#productTable', 'process/ajax.tables.pro.php?action=product_table');
 					},
 					error: function(xhr, status, error){
 						console.log(error);

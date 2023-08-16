@@ -18,7 +18,24 @@
 	<script src="../js/jquery-3.7.js?s=<?= time(); ?>"></script>
 	<title>Admin Dashboard</title>
 </head>
-<body>
+<body class="" style="">
+	<div class="loader">
+		<div class="loaderImg">
+			<img src="../assets/loader/loader.gif" width="300" height="300" alt="">
+		</div>
+	</div>
+	<?php echo isset($_SESSION['NewUser']) ? $_SESSION['NewUser'] : ''; ?>
+	<style>
+		/*.loader{
+			width: 100%;
+			height: 100vh;
+			background-color: rgba(0, 0, 0, 0.5);
+			top: 0;
+			left: 0;
+			position: fixed;
+			z-index: 9999999999999999999999999;
+		}*/
+	</style>
 	<?php require_once 'inc/header.php'; ?>
 	<div class="container-fluid" style="padding: px;">
 		<div id="toastContainer" class="position-absolute top-0 end-0 p-3" style="z-index: 9999"></div>
@@ -35,6 +52,8 @@
 				
 				<?php $page = isset($_GET['page']) && !empty($_GET['page']) ? $_GET['page'] : 'dashboard';
 					include_once($page.'.php');
+
+					
 				?>
 			</div>
 		</div>
@@ -45,6 +64,7 @@
 	<!-- custom js main -->
 	<script src="../js/script.js?s=<?= time(); ?>"></script>
 	<script src="js/script.js?s=<?= time(); ?>"></script>
+	<script src="js/ajax.tables.pro.js?s=<?= time(); ?>"></script>
 	
 	
 </body>

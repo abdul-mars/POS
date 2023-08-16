@@ -7,7 +7,7 @@
 				<h1 class="h2">Users</h1>
 				<div class="btn-toolbar mb-2 mb-md-0">
 					<button class="btn btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addNewUserMdl"><i class="fa fa-plus"></i> Add New User</button>
-					<!-- Modal start -->
+					<!-- add user Modal start -->
 					<div class="modal fade" id="addNewUserMdl" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
 							<div class="modal-content">
@@ -64,7 +64,7 @@
 			<h4>All Users</h4>
 			<hr>
 			<div class="table-responsive">
-				<?php $sql = "SELECT * FROM users";
+				<?php $sql = "SELECT * FROM users ORDER BY user_role ASC";
 				$result = $con->query($sql);
 				if ($result->num_rows < 1) {
 					echo "No Product";
@@ -85,7 +85,7 @@
 			          <tbody style="">
 					<?php $count = 1;
 					while ($data = $result->fetch_assoc()) { ?>
-						<tr class="">
+						<tr class="data-row" data-user-id="<?= $data['user_id']; ?>">
 			              <td><?= $count; ?></td>
 			              <!-- <td><img src="../assets/products/<?= $data['product_img']; ?>" width="50" height="50" alt="product image" style="border-radius: 50px;"></td> -->
 			              <td><?= ucwords($data['user_surname'].' '.$data['user_forenames']); ?></td>
@@ -93,8 +93,11 @@
 			              <td><?= ucfirst($data['user_role']); ?></td>
 			              <td><?= $data['last_login']; ?></td>
 			              <td>
-			              	<button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#delUserMdl" user-id="<?=$data['user_id']; ?>" user-name="<?= ucwords($data['user_surname'].' '.$data['user_forenames']); ?>">
-			              		<i class="fas fa-trash"></i> Delete
+			              	<?= ($data['password_reset'] == 1) ? '<button class="btn bg-warning btn-outline-warnin btn-sm" data-bs-toggle="modal" data-bs-target="#passwordResetMdl" user-id="'.$data['user_id'] .'" user-name="'. ucwords($data['user_surname'].' '.$data['user_forenames']).'">
+			              		 <i class="fas fa-exclamation-triangle text-waring"></i>
+			              	</button>' : '' ; ?>
+			              	<button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delUserMdl" user-id="<?=$data['user_id']; ?>" user-name="<?= ucwords($data['user_surname'].' '.$data['user_forenames']); ?>">
+			              		<i class="fas fa-trash"></i>
 			              	</button>
 			              </td>
 			            </tr>
@@ -109,7 +112,7 @@
 	</div>
 </div>
 
-<!-- add stock Modal -->
+<!-- delete user Modal -->
 <div class="modal fade" id="delUserMdl" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-sm">
     <div class="modal-content">
@@ -133,5 +136,34 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="passwordResetMdl" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reset User Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="" method="post" class="p-0" id="resetuserPassForm">
+	      <div class="modal-body text-center">
+	      	<input type="hidden" name="resetUserId" id="resetUserId" value="">
+	      	<h5 class="resetUserName" id="resetUserName"></h5>
+	      	<p style="margin-bottom: -2px">Forget his password</p>
+	      	<h5 id="userName" class="fw-bold"></h5>
+	      	<!-- <h5 class="text-danger"><i class="fas fa-3x fa-exclamation-triangle"></i></h5> -->
+	      	<p class="text-danger">Do you want to reset password?</p>
+	      	<!-- <input type="text" class="form-control" value="" readonly> -->
+	      </div>
+	      <div class="modal-footer">
+	        <button type="submit" class="btn btn forestgreen px-4 resetUserPassBtn">Yes, Reset</button>
+	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No, Cancel</button>
+	      </div>
+  	</form>
+    </div>
+  </div>
+</div>
+
+
+
 <!-- inventory js -->
 <script src="js/users.js?s=<?= time(); ?>"></script>

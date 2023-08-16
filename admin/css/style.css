@@ -44,8 +44,13 @@
 .forestgreen:hover{
 	
 }
+button.forestgreen:hover{
+	background-color: #196719;
+	color: #fff;
+}
 .active{
 	background-color: #196719 !important;
+	/*color: #fff;*/
 }
 
 td{
@@ -66,3 +71,4 @@ a > .card > .card-body{
 a > .card:hover{
 	transform: scale(1.05);
 }
+

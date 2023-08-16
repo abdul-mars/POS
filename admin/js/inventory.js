@@ -1,4 +1,8 @@
+//var price = stock = '';
 $(document).ready(function() {
+
+  fetchTables('#inventoryTable', 'process/ajax.tables.pro.php?action=inventory_table');
+  
   $('#productForm').submit(function(e) {
   // $('#addInventoryBtn').click(function (e) { 
     e.preventDefault(); // Prevent form submission
@@ -56,7 +60,7 @@ $(document).ready(function() {
                   }
                   // console.log(data);
                   $.ajax({
-                    url: 'process/inventory.pro.php', // Replace with your backend URL
+                    url: 'process/inventory.pro.php',
                     type: 'POST',
                     data: formData,
                     dataType: 'json',
@@ -66,11 +70,11 @@ $(document).ready(function() {
                       showToast(response.message);
                       $('#productForm')[0].reset();
                       $('#addInventMdl').modal('hide');
+                      fetchTables('#inventoryTable', 'process/ajax.tables.pro.php?action=inventory_table');
                     },
                     error: function(xhr, status, error) {
                       // Handle error response
                       console.log(xhr.responseText);
-                      // Display an error message or take appropriate action
                     }
                   });
                 }
@@ -97,6 +101,14 @@ $(document).ready(function() {
     // $('.modal-body').text(productId);
     modalTitle.text('Update stock for ' + productName);
     $('#productId').val(productId);
+
+    // var $row = $(updateInventoryBtn).closest('tr');
+    // var price = $row.find('.price').text();
+    // var stock = $row.find('.stock').text();
+
+    // showToast(price);
+    // showToast(stock);
+
   });
 
   $('#updatePriceCheck').change(function () {
@@ -128,7 +140,7 @@ $(document).ready(function() {
       'newCostPrice': costPrice,
       'updatePriceCheck': updatePriceCheck,
       'newPrice': newPrice,
-      'updatePriceBtn': true,
+      'updateStockBtn': true,
     }
 
     $.ajax({
@@ -137,13 +149,16 @@ $(document).ready(function() {
       data: data,
       beforeSend: function() {},
       success: function (response) {
-        alert(response);
+        // alert(response);
+        showToast(response);
+        $('#restockForm')[0].reset();
+        $('#updateInventoryMdl').modal('hide');
+        // showToast(price);
+        fetchTables('#inventoryTable', 'process/ajax.tables.pro.php?action=inventory_table');
       },
       error: function(xhr, status, error) {
         console.log(error);
       }
     });
-    
-    
   });
 });

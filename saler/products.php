@@ -20,13 +20,13 @@
 			<div class="card proCard" product-name="<?= $data['product_name']; ?>" product-price="<?= $data['product_price']; ?>" product-id="<?= $data['product_id']; ?>" product-img="<?= $data['product_img']; ?>" product-stock="<?= $data['stock']; ?>">
 				<div class="proCardInner">
 					<div class="proName">
-						<h5><?= $data['product_name']; ?></h5>
+						<p class="fw-bold"><?= $data['product_name']; ?></p>
 					</div>
 					<div class="proImg">
-						<img src="../assets/products/<?= $data['product_img']; ?>" alt="product image" width="100">
+						<img src="../assets/products/<?= $data['product_img']; ?>" alt="product image" width="50" height="50">
 					</div>
 					<div class="proPrice" style="<!-- background-color: lavender; -->">
-						<h5>₵<?= $data['product_price']; ?></h5>
+						<p class="fw-bold">₵<?= $data['product_price']; ?></p>
 					</div>
 				</div>					
 			</div>

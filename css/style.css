@@ -56,25 +56,29 @@ h3{
     border-radius: 5px;
     /* margin-left: 20px; */
     height: 30px;
+    padding: 15px 7px 15px 7px;
 }
 
 .input:focus {
     /* border-color: red; */
-    border: 2px solid red;
+    border: 2px solid forestgreen;
     outline: none;
 }
 .signinBtn{
     font-size: 20px;
     color: #fff;
     border-radius: 7px;
-    background-color: rgb(14, 14, 202);
+    /*background-color: rgb(14, 14, 202);*/
+    background-color: forestgreen;
     padding: 10px;
     border: none;
     float: right;
     cursor: pointer;
 }
 .signinBtn:hover{
-    background-color: rgb(7, 7, 173);
+    /*background-color: rgb(7, 7, 173);*/
+    background-color: #196719;
+    color: white;
 }
 .err{
     color: red;
@@ -87,11 +91,29 @@ h3{
 }
 
 .loader{
-    background-color: rgba(185, 169, 169, 0.212);
+    /*background-color: rgba(185, 169, 169, 0.212);*/
+    background-color: rgba(0, 0, 0, 0.5);
     height: 100vh;
     width: 100vw;
     z-index: 1;
     position: fixed;
     text-align: center;
+    align-items: center;
     display: none;
+    justify-content: center;
+    
+}
+
+.newUserDiv{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    align-content: center;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
 }

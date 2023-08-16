@@ -1,32 +1,4 @@
-<?php session_start();
-	if ((!isset($_SESSION['username'])) || (!isset($_SESSION['surname'])) || (!isset($_SESSION['forenames'])) || (!isset($_SESSION['userId']))) {
-		header("location: ../index.php");
-		// exit();
-	} else {
-		$userId = $_SESSION['userId'];
-		$username = $_SESSION['username'];
-		$surname = $_SESSION['surname'];
-		$forenames = $_SESSION['forenames'];
-	}
-	require_once '../inc/dbConnect.php';
-	
-?>
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!-- bootstrap -->
-		<link rel="stylesheet" href="../css/bootstrap.min.css?s=<?= time(); ?>">
-		<!-- font awesome -->
-		<link rel="stylesheet" href="../css/all.css?s=<?= time(); ?>">
-		<!-- custom css main -->
-		<link rel="stylesheet" href="../css/style.css?s=<?= time(); ?>">
-		<!-- custom admin css -->
-		<link rel="stylesheet" href="css/style.css?s=<?= time(); ?>">
-		<title>Reports</title>
-	</head>
-	<body>
+
 		<?php include_once 'inc/header.php'; ?>
 
 		<div class="container-fluid">
@@ -140,8 +112,8 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- bootstrap js -->
+<?//= require_once 'inc/footer.php'; ?>
+<!-- bootstrap js -->
 		<script src="../js/bootstrap.bundle.min.js?s=<?= time(); ?>"></script>
 		<!-- jQuery -->
 		<script src="../js/jquery-3.7.js?s=<?= time(); ?>"></script>

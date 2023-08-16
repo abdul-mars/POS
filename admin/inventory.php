@@ -68,51 +68,14 @@
 		<div class="card-body">
 			<h4>All Products in inventory</h4>
 			<hr>
-			<div class="table-responsive">
-				<?php $sql = "SELECT * FROM products";
-				$result = $con->query($sql);
-				if ($result->num_rows < 1) {
-					echo "No Product";
-				} else { ?>
-					<table class="table table-striped table-sm">
-			          <thead>
-			            <tr>
-			              <th scope="col">#</th>
-			              <th scope="col">Image</th>
-			              <th scope="col">Name</th>
-			              <th scope="col">Price</th>
-			              <th scope="col">Stock</th>
-			              <th scope="col">Action</th>
-			            </tr>
-			          </thead>
-			          <tbody style="">
-					<?php $count = 1;
-					while ($data = $result->fetch_assoc()) { ?>
-						<tr class="">
-			              <td><?= $count; ?></td>
-			              <td><img src="../assets/products/<?= $data['product_img']; ?>" width="50" height="50" alt="product image" style="border-radius: 50px;"></td>
-			              <td><?= ucwords($data['product_name']); ?></td>
-			              <td><?= $data['product_price']; ?></td>
-			              <td><?= $data['stock']; ?></td>
-			              <!-- <td><?= $data['product_name']; ?></td> -->
-			              <td>
-			              	<button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#updateInventoryMdl" product-id="<?= $data['product_id']; ?>" product-name="<?= $data['product_name']; ?>">
-			              		Restock
-			              	</button>
-			              </td>
-			            </tr>
-					<?php $count++;
-					}
-				}
-				?>
-		          </tbody>
-		        </table>
+			<div class="table-responsive" id="inventoryTable">
+				
 		    </div>
 		</div>
 	</div>
 </div>
 
-<!-- add stock Modal -->
+<!-- restock Modal -->
 <div class="modal fade" id="updateInventoryMdl" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-s">
     <div class="modal-content">
@@ -120,7 +83,7 @@
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="" method="post">
+      <form action="" method="post" id="restockForm">
 	      <div class="modal-body row">
 	      	<div class="mb-3 col-6">
 	      		<input type="hidden" name="productId" id="productId" value="">
@@ -141,7 +104,7 @@
 			</div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-success updateStockBtn">Update Stock</button>
+	        <button type="button" class="btn btn-success updateStockBtn">Restock</button>
 	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
 	      </div>
   	</form>

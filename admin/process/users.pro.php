@@ -53,7 +53,22 @@
 				$stmt = $con->prepare($sql);
 				$stmt->bind_param('ssssis', $surname, $forenames, $username, $passwordHashed, $phone, $role);
 				if ($stmt->execute()) {
-					echo "New User added successfully. Your username is $username and password is $password";
+					$msg = "New User added successfully. Your username is $username and password is $password";
+					// Fetch the newly inserted user data
+				    $newUserId = $stmt->insert_id;
+				    $sqlNewUser = "SELECT * FROM users WHERE user_id = ?";
+				    $stmtNewUser = $con->prepare($sqlNewUser);
+				    $stmtNewUser->bind_param("i", $newUserId);
+				    $stmtNewUser->execute();
+				    $resultNewUser = $stmtNewUser->get_result();
+				    $newUserData = $resultNewUser->fetch_assoc();
+
+				    // Form the success message with username and password
+				    $response = array('success' => true, 'message' => $msg, 'user' => $newUserData);
+
+				    // Return the response as JSON
+				    echo json_encode($response);
+
 					unset($_SESSION['random_password']);
 				} else {
 					echo "Unable to add new user";

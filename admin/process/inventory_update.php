@@ -1,6 +1,6 @@
 <?php require_once '../checkSession.php';
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-		if (isset($_POST['updatePriceBtn'])) {
+		if (isset($_POST['updateStockBtn'])) {
 			$productId = mysqli_real_escape_string($con, $_POST['productId']);
 			$newStock = mysqli_real_escape_string($con, $_POST['newStock']);
 			$costPrice = mysqli_real_escape_string($con, $_POST['newCostPrice']);

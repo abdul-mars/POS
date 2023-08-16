@@ -276,14 +276,46 @@ figure img{
 @media print{
 	body *{
 		visibility: hidden;
+		-webkit-print-color-adjust: exact !important;
+		color-adjust: exact !important;
 	}
+	.inv, .date{
+		display: inline-block;
+	}
+
 	.chkoutMain * {
 		visibility: visible;
+		/*width: 100%;*/
+		width: 350px;
+	}
+	.invTime{
+		display: flex !important;
+		justify-content: space-between;
+		/*padding: 5px;*/
+		margin-top: -15px;
 	}
 	table{
 		border-collapse: collapse;
-		width: 100%;
+		width: 100vw;
 	}
+	table .checkoutRow{
+		display: block;
+	}
+	.chkoutItems table tr{
+		display: flex;
+		/*justify-content: space-evenly;*/
+	}
+	.chkoutItems table tr td{
+		display: flex;
+		flex-wrap: nowrap !important;
+		white-space: nowrap;
+    /*overflow: hidden;*/
+    text-overflow: ellipsis;
+	}
+	/*.chkoutItems table .totalRow{
+		display: flex;
+		justify-content: space-between;
+	}*/
 	nav * {
 		display: none;
 	}
@@ -328,3 +360,25 @@ figure img{
 .reportSammaryDiv:hover{
 	transform: scale(1.03);
 }
+
+.footer{
+		padding: 5px;
+		position: sticky;
+		bottom: 0;
+	}
+	.footer a{
+		color: white;
+		text-decoration: none;
+
+	}
+	.footerMain{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		align-content: center;
+	}
+	.tall{
+		height: 50px;
+		width: 2px;
+		background: white;
+	}
